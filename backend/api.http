@@ -2,9 +2,9 @@ POST http://localhost:9090/register HTTP/1.1
 content-Type: application/json
 
 {
-  "username": "wing1234 // radha123 ",
-  "password": "mypassword4 // mypassword",
-  "email": "wing@example.com // radha@example.com",
+  "username": "bundiKladoo",
+  "password": "mine24",
+  "email": "ladoo@example.com",
   "name": "Radha"
 }
 
@@ -13,8 +13,8 @@ POST http://localhost:9090/login HTTP/1.1
 content-Type: application/json
 
 {
-    "email" : "wing@example.com",
-    "password": "mypassword4"
+    "email" : "ladoo@example.com",
+    "password": "mine24"
 }
 
 ###
@@ -22,5 +22,34 @@ GET http://localhost:9090/get_user_and_profile HTTP/1.1
 content-Type: application/json
 
 {
-  "token" : "fead1b841a6ddb5125b6005bc615ae1817c951e12a564de429748f8eaa45831a"
+  "token" : "916c0e0b8eaa6961d5bb682eb88884a71974e82e7af02cb29c5c664b7dda0826"
 }
+
+
+###
+POST http://localhost:9090/update_profile_data HTTP/1.1
+content-Type: application/json
+
+{
+  "token" : "0520861dd5569285180ef99c00a80274680805dccce3e58bd372d0218f4b20ba",
+  "bio": "GirishAhari",
+  "currentPost": "CTO",
+  "postWork": [
+    {
+      "company":"Microsoft",
+      "position":"CTO",
+      "years" : "2+"
+    }
+  ],
+  "education": [
+    {
+      "school":"IIT",
+      "degree":"Btech",
+      "fieldOfStudy":"2015-2019"
+    }
+  ]
+  
+}
+
+###
+GET http://localhost:9090/user/get_all_users 
