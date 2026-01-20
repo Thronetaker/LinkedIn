@@ -16,6 +16,8 @@ app.use(express.json());
 app.use(postRoutes);
 app.use(userRoutes);
 
+app.use(express.static("uploads"))
+
 const start = async() => {
     
     const connectDB = await mongoose.connect("mongodb+srv://parmanand224radha_db_user:FkUNF8z0gbdN8gZD@linkcluster.xycdaje.mongodb.net/?retryWrites=true&w=majority&appName=LinkCluster");

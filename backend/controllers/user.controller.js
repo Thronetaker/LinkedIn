@@ -5,23 +5,23 @@ import crypto from 'crypto';
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 
-const convertUserDataTOPDF = (userData) => {
+const convertUserDataTOPDF = async (userData) => {
     const doc = new PDFDocument();
 
-    const outputPath = crypto.randomBytes(32).toString("hex");
+    const outputPath = crypto.randomBytes(32).toString("hex") + ".pdf";
     const stream = fs.createWriteStream("uploads/"+ outputPath);
 
     doc.pipe(stream);
 
     doc.image(`uploads/${userData.userId.profilePicture}`,{align:"center",width: 100});
     doc.fontSize(14).text(`Name : ${userData.userId.name}`);
-    doc.fontSize(14).text("Username: ${userData.userId.username}");
-    doc.fontSize(14).text(`Email: ${userData.userId.email});
-    doc.fontSize(14).text(Bio: $(userData.bio}");
-    doc.fontSize(14).text(Current Position: ${userData.currentPosition}`)
+    doc.fontSize(14).text(`Username: ${userData.userId.username}`);
+    doc.fontSize(14).text(`Email: ${userData.userId.email}`);
+    doc.fontSize(14).text(`Bio: ${userData.bio}`);
+    doc.fontSize(14).text(`Current Position: ${userData.currentPost}`)
    doc.fontSize(14).text("Past Work: ") 
-     userData.pastWork.forEach((work, index) => {
-        doc.fontSize(14).text(`Company Name: ${work.companyName}`);
+     userData.postWork.forEach((work, index) => {
+        doc.fontSize(14).text(`Company Name: ${work.company}`);
         doc.fontSize(14).text(`Position: ${work.position}`);
         doc.fontSize(14).text(`Years: ${work.years}`);
     })
@@ -104,6 +104,9 @@ export const uploadProfilePicture = async (req, res) => {
 export const updateUserProfile = async(req, res) => {
     try{
         const {token , ...newUserData} = req.body;
+        // spread operator
+        // token ko alg rehne diya  krdiya NO CHANGE 
+        // jisse user logout na ho 
 
         const user = await User.findOne({token :token});
         if(!user) return res.status(404).json({messag :"User not found"});
@@ -147,7 +150,7 @@ export const getUserandProfile = async(req, res) => {
     }
 }
 
-export const updateProfileData = async(res, req) => {
+export const updateProfileData = async(req, res) => {
           try{
             const {token, ...newProfileData} = req.body;
 
@@ -162,7 +165,7 @@ export const updateProfileData = async(res, req) => {
 
             await profile_to_update.save();
 
-            return res.join({ message : "Profile Updated"});
+            return res.json({ message : "Profile Updated"});
 
           }catch(error) {
             return res.status(500).json({message: error.message});
@@ -184,10 +187,10 @@ export const getAllUserProfile = async(req,res) => {
 export const downloadProfile = async(req, res) => {
     const user_id = req.query.id;
     const userProfile = await Profile.findOne( { userId : user_id})
-    .populate('userId', 'name username email profilPicture');
+    .populate('userId', 'name username email profilePicture');
 
-    let a = await convertUserDataTOPDF(userProfile);
-    return res.json({ "message": a});
+    let outputPath = await convertUserDataTOPDF(userProfile);
+    return res.json({ "message": outputPath});
     try{
 
     }catch(error){
