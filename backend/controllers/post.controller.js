@@ -28,3 +28,41 @@ export const createPost = async (req, res) => {
         return res.status(200).json({message : err.message })
     }
 }
+
+export const getAllPosts = async(req,res) => {
+    
+    try{
+
+        // const user = await User.findOne({token:token});
+        // if(!user) return res.status(404).json({message : "User does not exists"}) ;
+
+        const posts = await Post.find().populate('userId', 'name username email profilePicture')
+        return res.json({ posts})
+
+
+
+    }catch(err){
+        return res.status(200).json({message : err.message })
+    }
+}
+
+export const deletePost =async (req,res) =>{
+    const {token, post_id} = req.body;
+    try{
+        const user = await User.findOne({token:token}).select("_id");
+        if(!user) return res.status(404).json({message : "User does not exists"}) ;
+
+        const post = await Post.find({_id : post_id});
+        if(!post) return res.status(404).json({message : "Post does not exists"}) ;
+
+        if(postUser.userId.toString() !== user._id.toString()){
+            return res.status(401).json({ message: "Unauthorized"})
+        }
+
+        await Post.deletPost({_id: post._id});
+        return res.json({ message : "Post deleted!"})
+
+    }catch(err){
+        return res.status(200).json({message : err.message })
+    }
+}
