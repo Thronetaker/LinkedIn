@@ -1,3 +1,4 @@
+import Comment from "../models/comments.model.js";
 import Post from "../models/posts.model.js";
 import User from "../models/user.model.js";
 
@@ -25,7 +26,7 @@ export const createPost = async (req, res) => {
         return res.status(200).json({ message : "Post Created"})
 
     }catch(err){
-        return res.status(200).json({message : err.message })
+        return res.status(500).json({message : err.message })
     }
 }
 
@@ -42,7 +43,7 @@ export const getAllPosts = async(req,res) => {
 
 
     }catch(err){
-        return res.status(200).json({message : err.message })
+        return res.status(500).json({message : err.message })
     }
 }
 
@@ -63,6 +64,83 @@ export const deletePost =async (req,res) =>{
         return res.json({ message : "Post deleted!"})
 
     }catch(err){
-        return res.status(200).json({message : err.message })
+        return res.status(500).json({message : err.message })
+    }
+}
+
+export const commentPost = async(req, res) =>{
+    const {token, post_id, commentBody} = req.body;
+
+    try{
+        const user = await User.findOne({token:token}).select("_id");
+        if(!user) return res.status(404).json({message : "User does not exists"}) ;
+
+        const post = await Post.find({_id : post_id});
+        if(!post) return res.status(404).json({message : "Post does not exists"}) ;
+
+        const comment = new Comment({
+            userId : user._id,
+            postId : post._id,
+            comment : commentBody
+        });
+
+        await comment.save();
+        return res.status(200).json({message : "Comment Added" })
+        
+    }catch(err){
+        return res.status(500).json({message : err.message })
+    }
+
+}
+
+export  const get_comment_by_post = async(req, res) =>{
+    const {post_id} = req.body;
+    try{
+        
+        const post = await Post.find({_id : post_id});
+        if(!post) return res.status(404).json({message : "Post does not exists"}) ;
+
+        return res.json({ comments : post.comments });
+
+    }catch(err){
+        return res.status(500).json({message : err.message })
+    }
+}
+
+export const delete_comment_of_user = async(req,res) => {
+    const {token, comment_id} = req.body;
+    try{
+        const user = await User.findOne({token:token}).select("_id");
+        if(!user) return res.status(404).json({message : "User does not exists"}) ;
+
+        const comment = await Comment.find({_id : comment_id});
+        if(!comment) return res.status(404).json({message : "Post does not exists"}) ;
+
+        if(comment.userId.toString() !== user._id.toString()){
+            return res.status(401).json({ message : "Unauthorized"});
+        }
+
+        await Comment.deleteOne({"_id" : comment_id});
+        
+        return res.json({message : "Comment deleted"});
+    }catch(err){
+        return res.status(500).json({message : err.message })
+    }
+}
+
+export const increment_likes = async(req,res )=> {
+    const { post_id} = req.body;
+    try{
+
+        const post = await Post.find({_id : post_id});
+        if(!post) return res.status(404).json({message : "Post does not exists"}) ;
+
+        post.likes = post.likes +1;
+        await post.save();
+
+        return res.json({message : "Like Increment"});
+
+    }catch(err){
+         return res.status(500).json({message : err.message });
     }
 }
