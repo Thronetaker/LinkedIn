@@ -80,7 +80,7 @@ export const login = async (req,res) =>{
 
         await User.updateOne({_id : user._id},{token});
         // console.log({token});
-        return res.json({token});
+        return res.json({token: token});
     }
     catch(err){
         res.status(500).json({message : " User do not exists"})
