@@ -1,0 +1,86 @@
+.container{
+   height : 90vh;
+   display : flex;
+   justify-content : center;
+   align-items : center;
+   background : snow;
+}
+
+
+.cardContainer{
+   height : 80vh;
+   display:flex;
+   border-radius: 10px;
+   overflow: hidden;
+   width : 80vw;
+   background: white;
+   box-shadow: 10px 10px 15px rgb(173, 173, 173);
+}
+
+.cardContainer_left{
+    flex: 0.6;
+    padding: 2rem;
+    text-align: center;
+    
+}
+   
+    .cardleft_heading{
+    font-weight: bold;
+    font-size: 1.8rem;
+    }
+    
+    .inputContainer{
+        display: flex;
+        flex-direction: column;
+        /* margin-top: 2rem; */
+        align-items: center;
+        justify-content: center;
+        padding-top: 1.3rem;
+        max-width:400px ;
+        margin: 0 auto;
+        gap: 1.5rem;
+    }
+
+    .inputRow{
+        width:fit-content ;
+        display: flex;
+        gap: 1.2rem;
+
+    }
+        .inputField{
+        padding-inline: 1.3rem;
+        padding-block: 0.8rem;
+        outline: none;
+        border-radius:10px ;
+        border: 1px solid silver;
+        width: 100%;
+        }
+    
+        .actionButton{
+            margin-top: 1.3rem;
+            border-radius: 10px;
+            border: 1px solid white;
+            font-size: 1.3rem;
+            /* font-weight: bold; */
+            user-select: none;
+            cursor: pointer;
+            background: rgb(236, 236, 236);
+            padding: 0.8rem 1.3rem;
+            width: 100%;
+            /* padding: 12px 45px;
+            letter-spacing: 1px;
+            width: fit-content;
+            text-transform: uppercase;
+            transition: transform 80ms ease-in; */
+        }
+
+    
+
+.cardContainer_right{
+    flex:0.4;
+    background: #674a9a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
