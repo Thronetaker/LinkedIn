@@ -1,4 +1,4 @@
-import { loginUser, registerUser } from "../../action/authAction/index.js";
+import { getAboutUser, loginUser, registerUser } from "../../action/authAction/index.js";
 
 const { createSlice } = require("@reduxjs/toolkit");
 const { connect } = require("react-redux");
@@ -17,6 +17,8 @@ const initialState = {
 
 };
 
+// authState function ko call krke use krna hoga => export krna
+
 const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -24,6 +26,9 @@ const authSlice = createSlice({
         reset: (state) => initialState,
         handleLoginUser : (state) => {
             state.message = "Login Successful";
+        },
+        emptyMessage: (state) => {
+            state.message = '';
         }
     },
 
@@ -65,8 +70,17 @@ const authSlice = createSlice({
             state.isError = true;
             state.message = action.payload;
             
-        })  
+        })   
+        .addCase(getAboutUser.fulfilled, (state, action) => {
+            state.isLoading = false;  
+            state.isError = false;      
+            state.profilefetched = true;
+            state.user = action.payload.profile;
+        })
     }
 })
 
+
+
+export const { reset, emptyMessage } = authSlice.actions;
 export default authSlice.reducer;

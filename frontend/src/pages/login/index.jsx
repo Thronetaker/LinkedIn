@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styles from './style.module.css';
 import { useRouter } from 'next/router';
-import { registerUser } from '@/config/redux/action/authAction';
+import { loginUser, registerUser } from '@/config/redux/action/authAction';
+import { emptyMessage } from '@/config/redux/reducer/authReducer';
+
 
 export default function LoginComponent() {
 
@@ -23,11 +25,27 @@ export default function LoginComponent() {
       router.push('/dashboard');
   }, [authState.loggedIn]);
 
+  useEffect(() => {
+    if(localStorage.getItem("token")){
+      router.push('/dashboard');
+    }
+  }, []);
+
+  useEffect(() => {
+    dispatch(emptyMessage());
+  }, [isLoginMethod]);
+
   const handleRegister  = () =>{
     console.log("Register..");
     dispatch(registerUser({username, password, email, name}));
     
   }
+
+  const handleLogin  = () =>{
+    console.log("Login..");
+    dispatch(loginUser({email, password}));
+  }
+
   return (
     <UserLayout>
       
@@ -39,17 +57,17 @@ export default function LoginComponent() {
           
           <div className={styles.inputContainer}>
 
-            <div className={styles.inputRow}>
+            {!isLoginMethod && <div className={styles.inputRow}>
               <input onChange={(e) => setUsername(e.target.value)} className={styles.inputField} type='text' placeholder='Username'/>
               <input onChange={(e) => setName(e.target.value)} className={styles.inputField} type='text' placeholder='Name'/>
-            </div>
+            </div>}
 
             <input onChange={(e) => setPassword(e.target.value)} className={styles.inputField} type='text' placeholder='Password'/>
             <input onChange={(e) => setEmail(e.target.value)} className={styles.inputField} type='text' placeholder='Email'/>
 
             <div className={styles.actionButton} onClick={ () => {
               if(isLoginMethod){
-                // login logic    
+                handleLogin();
               } else {
                 handleRegister();
               } 
@@ -61,6 +79,14 @@ export default function LoginComponent() {
           
          </div>
          <div className={styles.cardContainer_right}>
+            {isLoginMethod? <p>Don't have an account?</p> : <p>Already Have an Account ?</p>}
+            
+          <div style={{color: "black",textAlign: "center"}} className={styles.actionButton} onClick={ () => {
+              setIsLoginMethod(!isLoginMethod);
+            } }>
+              <p>{ isLoginMethod ? "Sign Up" : "Sign In" }</p>
+            </div>
+            
          </div>
       </div>
       </div>

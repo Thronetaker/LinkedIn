@@ -1,0 +1,96 @@
+.container{
+   height : 90vh;
+   display : flex;
+   justify-content : center;
+   align-items : center;
+   background : snow;
+}
+
+.cardContainer{
+   height : 80vh;
+   display:flex;
+   flex-direction: column;
+   border-radius: 10px;
+   overflow: hidden;
+   width : 80vw;
+   background: white;
+   box-shadow: 10px 10px 15px rgb(173, 173, 173);
+   justify-content: center;
+   align-items: center;
+   margin: 0 auto;
+}
+
+.cap{
+    background-color: yellow;
+    height: 50px;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px 15px 0 0 ;
+}
+
+.cardbox{
+    background-color: palevioletred;
+    height: 250px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;    
+}
+   .heart2{
+    background-color: purple;
+    height: 100px;
+    width: 100px;
+   }
+   .circle{
+    background-color: purple;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+   }
+
+   .uppercircle{
+    display: flex;
+   }
+
+
+.heart {
+  position: relative;
+  width: 100px;
+  height: 90px;
+  background: red;
+  transform: rotate(-45deg);
+  margin: 50px;
+  animation: beat 1s infinite; 
+}
+
+.heart::before,
+.heart::after {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 90px;
+  background: red;
+  border-radius: 50%;
+}
+
+.heart::before {
+  top: -50px;
+  left: 0;
+}
+
+.heart::after {
+  left: 50px;
+  top: 0;
+}
+
+
+@keyframes beat {
+  0%, 100% {
+    transform: rotate(-45deg) scale(1);
+  }
+  50% {
+    transform: rotate(-45deg) scale(1.2);
+  }
+}

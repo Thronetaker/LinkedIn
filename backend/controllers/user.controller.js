@@ -67,7 +67,7 @@ export const login = async (req,res) =>{
     // console.log(req.body);
     try{
         const { email,password} = req.body;
-        if( !email || !password) return res.status(400).json({message : "All Fiels are required"});
+        if( !email || !password) return res.status(400).json({message : "All Fields are required"});
 
         const user = await User.findOne({email});
 
@@ -134,7 +134,7 @@ export const updateUserProfile = async(req, res) => {
 export const getUserandProfile = async(req, res) => {
     
     try{
-        const {token} = req.body;
+        const {token} = req.query;
         const user = await User.findOne({token : token});
         if(!user) {
             return res.status(404).json({message : " user not found!"});
