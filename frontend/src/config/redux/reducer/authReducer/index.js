@@ -10,11 +10,9 @@ const initialState = {
     isLoading: false,
     loggedIn: false,
     message: '',
-    profilefetched: false,
+    profileFetched: false,
     connections: [],
-    connectionRequest: [],
-
-
+    connectionRequest: []
 };
 
 // authState function ko call krke use krna hoga => export krna
@@ -74,7 +72,7 @@ const authSlice = createSlice({
         .addCase(getAboutUser.fulfilled, (state, action) => {
             state.isLoading = false;  
             state.isError = false;      
-            state.profilefetched = true;
+            state.profileFetched = true;
             state.user = action.payload.profile;
         })
     }
