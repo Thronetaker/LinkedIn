@@ -5,7 +5,7 @@ import { getAllPosts } from "../../action/postAction";
 const initialState = {
     posts: [],
     isLoading: false,   
-    logggedIn: false,
+    loggedIn: false,
     postFetched: false,
     isError: false,
     message: '' ,

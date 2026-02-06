@@ -73,7 +73,7 @@ const authSlice = createSlice({
             state.isLoading = false;  
             state.isError = false;      
             state.profileFetched = true;
-            state.user = action.payload.profile;
+            state.user = action.payload;
         })
     }
 })

@@ -28,8 +28,8 @@ export default function dashboard() {
     }, [isTokenThere]);
   return (
     <div>
-      {authState.profilefetched && <div>
-        Hey  , Welcome to Dashboard
+      {authState.profileFetched && <div>
+        Hey {authState.user.userId.name} , Welcome to Dashboard
         </div>}
     </div>
   )
