@@ -22,7 +22,7 @@ GET http://localhost:9090/get_user_and_profile HTTP/1.1
 content-Type: application/json
 
 {
-  "token" : "916c0e0b8eaa6961d5bb682eb88884a71974e82e7af02cb29c5c664b7dda0826"
+  "token" : "3111c555a38ede9b2b6b3f8d37b58e1822dc19e71015f51f12aa8ab59884b017"
 }
 
 ###
@@ -32,7 +32,7 @@ GET http://localhost:9090/get_user_and_profile HTTP/1.1
 content-Type: application/json
 
 {
-  "token" : "0520861dd5569285180ef99c00a80274680805dccce3e58bd372d0218f4b20ba"
+  "token" : "3111c555a38ede9b2b6b3f8d37b58e1822dc19e71015f51f12aa8ab59884b017"
 }
 
 ###
@@ -40,7 +40,7 @@ POST http://localhost:9090/update_profile_data
 Content-Type: application/json
 
 {
-  "token" : "0520861dd5569285180ef99c00a80274680805dccce3e58bd372d0218f4b20ba",
+  "token" : "3111c555a38ede9b2b6b3f8d37b58e1822dc19e71015f51f12aa8ab59884b017",
   "bio": "GirishAhari",
   "currentPost": "CTO",
   "postWork": [
