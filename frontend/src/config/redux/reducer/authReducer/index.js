@@ -1,4 +1,4 @@
-import { getAboutUser, loginUser, registerUser } from "../../action/authAction/index.js";
+import { getAboutUser, getAllUsers, loginUser, registerUser } from "../../action/authAction/index.js";
 
 const { createSlice } = require("@reduxjs/toolkit");
 const { connect } = require("react-redux");
@@ -13,7 +13,9 @@ const initialState = {
     message: '',
     profileFetched: false,
     connections: [],
-    connectionRequest: []
+    connectionRequest: [],
+    all_users: [],
+    all_profiles_fetched: false
 };
 
 // authState function ko call krke use krna hoga => export krna
@@ -82,6 +84,11 @@ const authSlice = createSlice({
             state.profileFetched = true;
             state.user = action.payload;
         })
+        .addCase(getAllUsers.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.isError = false;
+            state.all_users = action.payload.profiles;
+        })   
     }
 })
 
