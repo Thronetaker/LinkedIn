@@ -67,7 +67,7 @@ const authSlice = createSlice({
             state.isLoading = false;  
             state.isError = false;      
             state.isSuccess = true;
-            state.loggedIn = true;
+            state.loggedIn = false;
             state.message = {
                 message: "Registration Successful. Please Login to continue."
             }
@@ -87,6 +87,7 @@ const authSlice = createSlice({
         .addCase(getAllUsers.fulfilled, (state, action) => {
             state.isLoading = false;
             state.isError = false;
+            state.all_profiles_fetched = true;
             state.all_users = action.payload.profiles;
         })   
     }

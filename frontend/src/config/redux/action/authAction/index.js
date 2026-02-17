@@ -7,13 +7,7 @@ export const loginUser= createAsyncThunk(
 
     async (user, thunkAPI) => {
         try {
-            // const response = await fetch("http://localhost:5000/api/auth/login", {
-            //     method: "POST",
-            //     headers: {
-            //         "Content-Type": "application/json",
-            //     },
-            //     body: JSON.stringify(userData),
-            // });
+            
 
             const response = await clientServer.post("/login", {
                 email : user.email,
@@ -44,7 +38,7 @@ export const registerUser = createAsyncThunk("user/register",
                 email: user.email,
                 name : user.name
             });
-            // return thunkAPI.fulfillWithValue(response.data);
+            return thunkAPI.fulfillWithValue(response.data);
         } catch (error) {
             return thunkAPI.rejectWithValue(error.response.data);
         }           
