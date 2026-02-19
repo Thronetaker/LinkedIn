@@ -13,6 +13,8 @@ export default function dashboard() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
 
+  const postState = useSelector((state) => state.postReducer);
+
   useEffect(() => {
     if (authState.isTokenThere) {
       console.log("Token is there, fetching data...");
@@ -76,6 +78,26 @@ export default function dashboard() {
               }
               
             </div>
+
+            <div className={styles.postsContainer}>
+
+              {postState.posts.map( (post) => {
+                return (
+                  <div key={post._id} className={styles.singleCard}>
+
+                    <div className={styles.singleCard_profileContainer}>
+                      <img className={styles.userProfile} src={`${BASE_URL}/uploads/${post.userId.profilePicture || "default.jpg"}`} />
+                      <p>{post.userId.name} </p>
+                    </div>
+                    
+                  </div>
+
+                )
+              })}
+
+            </div>
+
+
           </div>
         </DashboardLayout>
       </UserLayout>

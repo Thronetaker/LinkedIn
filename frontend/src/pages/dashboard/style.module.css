@@ -1,11 +1,13 @@
 .scrollComponent{
     display: flex;
     justify-content: space-around;
+    
+    
 }
 .createPostContainer{
     display: flex;
     height: 10svh;
-    width: 70%;
+    width: 100%;
     padding-inline: 0.8rem;
     gap: 1.3rem;
     position: relative;
@@ -62,4 +64,17 @@
     padding-inline: 1.2rem;
     padding-block: 0.5rem;
     cursor: pointer;
+}
+
+.singleCard{
+    width:100%;
+    border-radius: 10px 10px 0px 0px;
+    border-bottom: 1px solid rgb(179, 179, 179 );
+
+}
+
+.wrapper{
+    display: flex;
+    flex-direction: column;
+    gap:1.3rem;
 }

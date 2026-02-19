@@ -11,6 +11,6 @@ export const   store = configureStore({
   reducer: {
     // Register Reducers Here
     auth : authReducer,
-    posts : postReducer
+    postReducer : postReducer
   }
 });
