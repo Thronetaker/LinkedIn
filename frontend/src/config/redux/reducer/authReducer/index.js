@@ -4,7 +4,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 const { connect } = require("react-redux");
 
 const initialState = {
-    user:[],
+    user:null,
     isError: false,
     isSuccess: false,
     isLoading: false,

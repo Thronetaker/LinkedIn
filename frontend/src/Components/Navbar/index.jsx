@@ -1,10 +1,13 @@
 import React from 'react';
 import styles from './style.module.css';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { reset } from '@/config/redux/reducer/authReducer';
+
 
 export default function NavBarComponent() {
     const router = useRouter();
+    const dispatch = useDispatch();
     const authState =  useSelector((state) => state.auth);
   return (
     <div className={styles.container}>
@@ -18,7 +21,14 @@ export default function NavBarComponent() {
 
               <div style={{display: "flex", gap:"1.2rem"}}>
                 <p>Hey, {authState.user.userId.name}</p>
+                
                 <p style={{fontWeight:"bold", cursor:"pointer"}} onClick={() => router.push('/profile')}>Profile</p>
+
+                <p onClick={() => {
+                  localStorage.removeItem("token")
+                  router.push('/login')
+                  dispatch(reset())
+                }} style={{fontWeight:"bold", cursor:"pointer"}}>Logout</p>
               </div>
             
           </div>}
