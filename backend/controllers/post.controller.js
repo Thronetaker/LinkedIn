@@ -60,7 +60,7 @@ export const deletePost =async (req,res) =>{
             return res.status(401).json({ message: "Unauthorized"})
         }
 
-        await Post.deletPost({_id: post._id});
+        await Post.deleteOne({_id: post._id});
         return res.json({ message : "Post deleted!"})
 
     }catch(err){
