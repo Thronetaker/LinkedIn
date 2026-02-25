@@ -40,9 +40,22 @@ const postSlice = createSlice({
             state.isLoading = false;
             state.isError = true;
             state.message = action.payload || "Fetching Posts Failed";
-        })  
+        }) 
+        .addCase(getAllComments.pending, (state) => {
+            state.isLoading = true;
+            state.message = "Fetching all the comments ....";
+        })
+        .addCase(getAllComments.fulfilled, (state, action) => {
+            state.postId = action.payload.postId;
+        })
+        // .addCase(getAllComments.rejected, (state, action) => {
+        //     state.isLoading = false;
+        //     state.isError = true;
+        //     state.message = action.payload || "Fetching Comments Failed";
+        // })
+
     }
+});
 
-})
-
+export const { resetPostId} = postSlice.actions;
 export default postSlice.reducer;

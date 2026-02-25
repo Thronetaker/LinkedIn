@@ -94,7 +94,7 @@ export const commentPost = async(req, res) =>{
 }
 
 export  const get_comment_by_post = async(req, res) =>{
-    const {post_id} = req.body;
+    const {post_id} = req.query;
     try{
         
         const post = await Post.find({_id : post_id});
