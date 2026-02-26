@@ -224,7 +224,7 @@ export default function dashboard() {
     return (
       <UserLayout>
         <DashboardLayout>
-          <h2>Loading.....</h2>
+         <h2>Loading.........</h2>
         </DashboardLayout>
       </UserLayout>
     );
