@@ -100,7 +100,11 @@ export  const get_comment_by_post = async(req, res) =>{
         const post = await Post.find({_id : post_id});
         if(!post) return res.status(404).json({message : "Post does not exists"}) ;
 
-        return res.json({ comments : post.comments });
+        const comments = await Comment
+        .find({postId : post_id})
+        .populate('userId', 'name username ');
+
+        return res.json({ comments.reverse()}) });
 
     }catch(err){
         return res.status(500).json({message : err.message })
