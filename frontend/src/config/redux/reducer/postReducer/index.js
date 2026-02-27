@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPosts } from "../../action/postAction";
+import { getAllComments, getAllPosts } from "../../action/postAction";
 
 
 const initialState = {
@@ -47,6 +47,8 @@ const postSlice = createSlice({
         })
         .addCase(getAllComments.fulfilled, (state, action) => {
             state.postId = action.payload.postId;
+            state.comments = action.payload.comments;
+            console.log(state.comments);
         })
         // .addCase(getAllComments.rejected, (state, action) => {
         //     state.isLoading = false;

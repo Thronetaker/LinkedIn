@@ -171,7 +171,7 @@ export default function dashboard() {
               <div 
                onClick={(e) => {
                 e.stopPropagation()
-               }} className={styles.allCommentsConatiner}>
+               }} className={styles.allCommentsContainer}>
                 {postState.comments.length === 0 && <h2>No Comments</h2> }
 
 

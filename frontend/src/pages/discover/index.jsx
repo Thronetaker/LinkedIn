@@ -4,6 +4,7 @@ import UserLayout from '@/layout/UserLayout'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styles from "./index.module.css";
+import { BASE_URL } from '@/config';
 
 export default function Discoverpage() {
   const authState = useSelector((state) => state.auth); 

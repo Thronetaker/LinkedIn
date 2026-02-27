@@ -104,7 +104,7 @@ export  const get_comment_by_post = async(req, res) =>{
         .find({postId : post_id})
         .populate('userId', 'name username ');
 
-        return res.json({ comments.reverse()}) });
+        return res.json({ comments: comments.reverse()});
 
     }catch(err){
         return res.status(500).json({message : err.message })
