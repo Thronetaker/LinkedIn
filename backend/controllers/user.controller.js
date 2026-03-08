@@ -6,6 +6,7 @@ import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import ConnectionRequest from "../models/connection.model.js";
 import Comment from "../models/comments.model.js";
+import Post from "../models/posts.model.js";
 
 const convertUserDataTOPDF = async (userData) => {
     const doc = new PDFDocument();
@@ -335,7 +336,7 @@ export const commentPost = async(req, res) => {
         })
 
         await comment.save();
-        return res.json({message : "Comment added!"});
+        return res.status(200).json({message : "Comment added!"});
     }catch(err){
         return res.status(500).json({message : err.message});   
         }

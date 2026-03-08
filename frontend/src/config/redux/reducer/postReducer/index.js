@@ -14,7 +14,7 @@ const initialState = {
 }
 
 const postSlice = createSlice({
-    name: "post",
+    name: "postReducer",
     initialState,
     reducers: {
         reset: (state) => initialState,
@@ -48,6 +48,7 @@ const postSlice = createSlice({
         .addCase(getAllComments.fulfilled, (state, action) => {
             state.postId = action.payload.postId;
             state.comments = action.payload.comments;
+            state.isLoading = false;
             console.log(state.comments);
         })
         // .addCase(getAllComments.rejected, (state, action) => {

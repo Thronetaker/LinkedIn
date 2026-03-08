@@ -53,17 +53,18 @@ export const deletePost =async (req,res) =>{
         const user = await User.findOne({token:token}).select("_id");
         if(!user) return res.status(404).json({message : "User does not exists"}) ;
 
-        const post = await Post.find({_id : post_id});
+        const post = await Post.findById(post_id);
         if(!post) return res.status(404).json({message : "Post does not exists"}) ;
 
-        if(postUser.userId.toString() !== user._id.toString()){
+        if(post.userId.toString() !== user._id.toString()){
             return res.status(401).json({ message: "Unauthorized"})
         }
 
-        await Post.deleteOne({_id: post._id});
+        await Post.findByIdAndDelete(post._id);
         return res.json({ message : "Post deleted!"})
 
     }catch(err){
+        console.log(err);
         return res.status(500).json({message : err.message })
     }
 }
@@ -136,11 +137,12 @@ export const increment_likes = async(req,res )=> {
     const { post_id} = req.body;
     try{
 
-        const post = await Post.find({_id : post_id});
+        const post = await Post.findByIdAndUpdate(post_id, {$inc: {likes: 1}});
+        console.log(post);
         if(!post) return res.status(404).json({message : "Post does not exists"}) ;
 
-        post.likes = post.likes +1;
-        await post.save();
+        // post.likes = post.likes +1;
+        // await post.save();
 
         return res.json({message : "Like Increment"});
 
