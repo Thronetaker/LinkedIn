@@ -71,6 +71,7 @@ export const deletePost =async (req,res) =>{
 
 export const commentPost = async(req, res) =>{
     const {token, post_id, commentBody} = req.body;
+     
 
     try{
         const user = await User.findOne({token:token}).select("_id");
@@ -82,7 +83,7 @@ export const commentPost = async(req, res) =>{
         const comment = new Comment({
             userId : user._id,
             postId : post._id,
-            comment : commentBody
+            body : commentBody
         });
 
         await comment.save();
@@ -98,7 +99,7 @@ export  const get_comment_by_post = async(req, res) =>{
     const {post_id} = req.query;
     try{
         
-        const post = await Post.find({_id : post_id});
+        const post = await Post.findOne({_id : post_id});
         if(!post) return res.status(404).json({message : "Post does not exists"}) ;
 
         const comments = await Comment

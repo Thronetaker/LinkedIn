@@ -5,8 +5,9 @@ import crypto from 'crypto';
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import ConnectionRequest from "../models/connection.model.js";
-import Comment from "../models/comments.model.js";
+
 import Post from "../models/posts.model.js";
+import Comment from "../models/comments.model.js";
 
 const convertUserDataTOPDF = async (userData) => {
     const doc = new PDFDocument();
@@ -316,7 +317,8 @@ export const acceptConnectionRequest = async(req, res) => {
 
 
 export const commentPost = async(req, res) => {
-    const {token, post_id, body} = req.body;
+    const {token, post_id, commentBody} = req.body;
+    console.log(req.body);
 
     try{
         const user = await User.findOne({token: token}).select("_id");

@@ -83,7 +83,6 @@ export default function dashboard() {
               
             </div>
 
-        {console.log(postState)}
 
    
 
@@ -176,6 +175,7 @@ export default function dashboard() {
                onClick={(e) => {
                 e.stopPropagation()
                }} 
+               
                className={styles.allCommentsContainer}>
                 
                 {postState.comments.length === 0 && <h2>No Comments</h2> }
@@ -217,7 +217,7 @@ export default function dashboard() {
                   <div onClick={ async () =>{
                     await dispatch(postComment({post_id : postState.postId, body : commentText}))
                     await dispatch(getAllComments({post_id : postState.postId}));
-                    setCommentText("");
+                    // setCommentText("");
                   } } className={styles.postCommentContainer_commentBtn}>
                     <p>Comment</p>
                   </div>

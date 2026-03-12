@@ -47,15 +47,15 @@ const postSlice = createSlice({
         })
         .addCase(getAllComments.fulfilled, (state, action) => {
             state.postId = action.payload.postId;
-            state.comments = action.payload.comments;
+            state.comments = action.payload.comments.comments;
             state.isLoading = false;
             console.log(state.comments);
         })
-        // .addCase(getAllComments.rejected, (state, action) => {
-        //     state.isLoading = false;
-        //     state.isError = true;
-        //     state.message = action.payload || "Fetching Comments Failed";
-        // })
+        .addCase(getAllComments.rejected, (state, action) => {
+            state.isLoading = false;
+            state.isError = true;
+            state.message = action.payload || "Fetching Comments Failed";
+        })
 
     }
 });
