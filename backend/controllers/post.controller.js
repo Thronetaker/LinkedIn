@@ -53,7 +53,7 @@ export const deletePost =async (req,res) =>{
         const user = await User.findOne({token:token}).select("_id");
         if(!user) return res.status(404).json({message : "User does not exists"}) ;
 
-        const post = await Post.findById(post_id);
+        const post = await Post.findOne({_id : post_id});
         if(!post) return res.status(404).json({message : "Post does not exists"}) ;
 
         if(post.userId.toString() !== user._id.toString()){
@@ -77,7 +77,7 @@ export const commentPost = async(req, res) =>{
         const user = await User.findOne({token:token}).select("_id");
         if(!user) return res.status(404).json({message : "User does not exists"}) ;
 
-        const post = await Post.find({_id : post_id});
+        const post = await Post.findOne({_id : post_id});
         if(!post) return res.status(404).json({message : "Post does not exists"}) ;
 
         const comment = new Comment({
@@ -97,6 +97,7 @@ export const commentPost = async(req, res) =>{
 
 export  const get_comment_by_post = async(req, res) =>{
     const {post_id} = req.query;
+    console.log(post_id);
     try{
         
         const post = await Post.findOne({_id : post_id});
@@ -119,8 +120,8 @@ export const delete_comment_of_user = async(req,res) => {
         const user = await User.findOne({token:token}).select("_id");
         if(!user) return res.status(404).json({message : "User does not exists"}) ;
 
-        const comment = await Comment.find({_id : comment_id});
-        if(!comment) return res.status(404).json({message : "Post does not exists"}) ;
+        const comment = await Comment.findOne({_id : comment_id});
+        if(!comment) return res.status(404).json({message : "Comment does not exists"}) ;
 
         if(comment.userId.toString() !== user._id.toString()){
             return res.status(401).json({ message : "Unauthorized"});

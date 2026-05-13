@@ -83,10 +83,13 @@ export default function dashboard() {
               
             </div>
 
+            
+
 
    
 
             <div className={styles.postsContainer}>
+              
 
               {postState.posts.map( (post) => {
                 return (
@@ -164,6 +167,8 @@ export default function dashboard() {
 
           </div>
 
+          
+
           {
             postState.postId !== "" && 
             <div  onClick = {
@@ -175,8 +180,10 @@ export default function dashboard() {
                onClick={(e) => {
                 e.stopPropagation()
                }} 
-               
+
                className={styles.allCommentsContainer}>
+                {console.log(postState)}
+                
                 
                 {postState.comments.length === 0 && <h2>No Comments</h2> }
 
@@ -210,7 +217,7 @@ export default function dashboard() {
                 
                   
               
-
+                
 
                 <div className={styles.postCommentContainer}>
                   <input placeholder="Add a comment..." type="text" value={commentText} onChange={(e) => setCommentText(e.target.value)}/>
