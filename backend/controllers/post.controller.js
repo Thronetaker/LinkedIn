@@ -95,7 +95,7 @@ export const commentPost = async(req, res) =>{
 
 }
 
-export  const get_comment_by_post = async(req, res) =>{
+export  const get_comments_by_post = async(req, res) =>{
     const {post_id} = req.query;
     console.log(post_id);
     try{
@@ -105,7 +105,7 @@ export  const get_comment_by_post = async(req, res) =>{
 
         const comments = await Comment
         .find({postId : post_id})
-        .populate('userId', 'name username ');
+        .populate('userId', 'username name');
 
         return res.json({ comments: comments.reverse()});
 
@@ -139,12 +139,10 @@ export const increment_likes = async(req,res )=> {
     const { post_id} = req.body;
     try{
 
-        const post = await Post.findByIdAndUpdate(post_id, {$inc: {likes: 1}});
+        const post = await Post.findByIdAndUpdate(post_id, {$inc: {likes: 1}}, {new :true});
         console.log(post);
         if(!post) return res.status(404).json({message : "Post does not exists"}) ;
 
-        // post.likes = post.likes +1;
-        // await post.save();
 
         return res.json({message : "Like Increment"});
 

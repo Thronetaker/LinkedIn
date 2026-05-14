@@ -46,7 +46,7 @@ const postSlice = createSlice({
             state.message = "Fetching all the comments ....";
         })
         .addCase(getAllComments.fulfilled, (state, action) => {
-            state.postId = action.payload.postId;
+            state.postId = action.payload.post_id;
             state.comments = action.payload.comments.comments;
             state.isLoading = false;
             console.log(state.comments);

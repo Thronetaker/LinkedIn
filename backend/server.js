@@ -11,7 +11,7 @@ const app = express();
 const PORT = 9090;
 
 app.use(cors());   // take requests from Axios Frontend
-app.use(express.json());
+app.use(express.json());   // yeh humesha routes k upr hi likhna h 
 
 app.use(postRoutes);
 app.use(userRoutes);

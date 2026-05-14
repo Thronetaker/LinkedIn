@@ -82,7 +82,7 @@ export const getAllComments = createAsyncThunk(
     async (postData, thunkAPI) => {
 
         try{
-            const response = await clientServer.get(`/get_comments`,{
+            const response = await clientServer.get("/get_comments",{
                 params:{
                     post_id :postData.post_id
                 }

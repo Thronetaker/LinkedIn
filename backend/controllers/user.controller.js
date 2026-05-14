@@ -40,7 +40,7 @@ const convertUserDataTOPDF = async (userData) => {
 export const register = async(req, res) => {
     try{
         const {name, email, username,password} = req.body;
-        if( !name || !email || !username || !password) return res.status(400).json({message : "All Fiels are required"});
+        if( !name || !email || !username || !password) return res.status(400).json({message : "All Fields are required"});
 
         const user = await User.findOne({email});
 
@@ -342,4 +342,26 @@ export const commentPost = async(req, res) => {
     }catch(err){
         return res.status(500).json({message : err.message});   
         }
+}
+
+export const getUserProfileAndUserBasedOnUsername = async ( req, res) =>{
+
+    const {username} = req.query;
+
+    try{
+
+        const user = await User.findOne({
+            username
+        });
+
+        if(!user) return res.status(404).json({message : "User not found"});
+
+        const userProfile = await Profile.findOne({userId: user._id})
+        .populate('userId',"name username email profilePicture");
+
+        return res.json({ "profile" : userProfile});
+
+    }catch(e){
+        return res.status(500).json({message : e.message});
+    }
 }
