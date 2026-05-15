@@ -40,8 +40,8 @@ POST http://localhost:9090/update_profile_data
 Content-Type: application/json
 
 {
-  "token" : "3111c555a38ede9b2b6b3f8d37b58e1822dc19e71015f51f12aa8ab59884b017",
-  "bio": "GirishAhari",
+  "token" : "5a5c5ea407c25352b40a95df7905e9f37d049d4f63fbf1f4307bf82e70e55b16",
+  "bio": "Hey i m Wing, i am from Rajsthan, i work in XYZ Company",
   "currentPost": "CTO",
   "postWork": [
     {
@@ -54,7 +54,7 @@ Content-Type: application/json
     {
       "school":"IIT",
       "degree":"Btech",
-      "fieldOfStudy":"2015-2019"
+      "fieldOfStudy":"2023-2027"
     }
   ]
   
@@ -71,4 +71,5 @@ content-Type: application/json
 }
 
 ###
-GET http://localhost:9090
+GET http://localhost:9090/user/get_profile_based_on_username?username=SleepyHead
+

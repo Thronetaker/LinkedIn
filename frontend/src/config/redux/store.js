@@ -1,7 +1,7 @@
 // STEPS for State Mangaement
 // Submit Action
 // Handle Action in it's reducer
-// Regsiter Here -> Reducer
+// Register Here -> Reducer
 
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './reducer/authReducer';
